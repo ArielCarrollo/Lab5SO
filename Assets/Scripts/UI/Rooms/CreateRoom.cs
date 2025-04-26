@@ -7,7 +7,15 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private Text _roomName;
+    private RoomsCanvases _roomsCanvases;
 
+    // 1 reference
+    public void FirstInitialize(RoomsCanvases canvases)
+    {
+        _roomsCanvases = canvases;
+    }
+
+    // 0 reference
     public void OnClick_CreateRoom()
     {
         if (!PhotonNetwork.IsConnected)
@@ -15,16 +23,19 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
 
         RoomOptions options = new RoomOptions();
         options.MaxPlayers = 4;
-        PhotonNetwork.JoinOrCreateRoom(_roomName.text, options, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom(_roomName.text, options, null);
     }
 
+    // 11 references
     public override void OnCreatedRoom()
     {
-        Debug.Log("Sala criada com sucesso.", this);
+        Debug.Log("Created room successfully.", this);
+        _roomsCanvases.CurrentRoomCanvas.Show();
     }
 
+    // 11 references
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        Debug.Log("Falha ao criar sala: " + message, this);
+        Debug.Log("Room creation failed: " + message, this);
     }
 }
