@@ -18,7 +18,8 @@ public class PhotonConnectionTest : MonoBehaviourPunCallbacks
     {
         Debug.Log("? Conectado al servidor de Photon.");
         Debug.Log(PhotonNetwork.LocalPlayer.NickName);
-        PhotonNetwork.JoinLobby();
+        if(!PhotonNetwork.InLobby)
+            PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
