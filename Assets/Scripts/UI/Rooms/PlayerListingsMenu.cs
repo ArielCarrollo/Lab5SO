@@ -54,4 +54,11 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
             _listings.RemoveAt(index);
         }
     }
+    public override void OnJoinedRoom()
+    {
+        _content.DestroyChildren();
+        _listings.Clear();
+
+        GetCurrentRoomPlayers();
+    }
 }
