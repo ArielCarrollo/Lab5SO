@@ -59,12 +59,4 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
             _listings.RemoveAt(index);
         }
     }
-    //public override void OnJoinedRoom()
-    //{
-    //    // Si el Master ya cargó la Arena, sigue la carga
-    //    if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("loadedScene"))
-    //    {
-    //        PhotonNetwork.LoadLevel((string)PhotonNetwork.CurrentRoom.CustomProperties["loadedScene"]);
-    //    }
-    //}
 }

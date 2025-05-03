@@ -288,7 +288,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  rotationSpeed: 10
+  rotationSmoothTime: 0.1
+  mouseSensitivityX: 50
+  mouseSensitivityY: 50
+  maxPitch: 80
+  minPitch: -80
   playerCameraComponent: {fileID: 8531882710919251019}
   playerAudioListener: {fileID: 9017095386016458389}
 --- !u!54 &8459562842746672374
