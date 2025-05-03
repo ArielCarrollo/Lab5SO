@@ -1,6 +1,9 @@
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.UI;
 
-public class CurrentRoomCanvas : MonoBehaviour
+public class CurrentRoomCanvas : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private PlayerListingsMenu _playerListingsMenu;
@@ -8,6 +11,7 @@ public class CurrentRoomCanvas : MonoBehaviour
     [SerializeField]
     private LeaveRoomMenu _leaveRoomMenu;
     private RoomsCanvases _roomsCanvases;
+    [SerializeField] private Button startGameButton;
 
     // Reference
     public void FirstInitialize(RoomsCanvases canvases)
@@ -19,9 +23,20 @@ public class CurrentRoomCanvas : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
+        startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
     }
     public void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    public void OnClick_StartGame()
+    {
+        GameManager.Instance.StartGame();
+    }
+
+    public override void OnMasterClientSwitched(Player newMaster)
+    {
+        startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
     }
 }

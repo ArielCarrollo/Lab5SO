@@ -11,18 +11,22 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
 
     private List<PlayerListing> _listings = new List<PlayerListing>();
     private RoomsCanvases _roomsCanvases;
+
     private void Awake()
     {
         GetCurrentRoomPlayers();
     }
+
     public void FirstInitialize(RoomsCanvases canvases)
     {
         _roomsCanvases = canvases;
     }
+
     public override void OnLeftRoom()
     {
         _content.DestroyChildren();
     }
+
     private void AddPlayerListing(Player player)
     {
         PlayerListing listing = Instantiate(_playerListing, _content);
@@ -32,6 +36,7 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
             _listings.Add(listing);
         }
     }
+
     private void GetCurrentRoomPlayers()
     {
         foreach (KeyValuePair<int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
@@ -54,11 +59,12 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
             _listings.RemoveAt(index);
         }
     }
-    public override void OnJoinedRoom()
-    {
-        _content.DestroyChildren();
-        _listings.Clear();
-
-        GetCurrentRoomPlayers();
-    }
+    //public override void OnJoinedRoom()
+    //{
+    //    // Si el Master ya cargó la Arena, sigue la carga
+    //    if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("loadedScene"))
+    //    {
+    //        PhotonNetwork.LoadLevel((string)PhotonNetwork.CurrentRoom.CustomProperties["loadedScene"]);
+    //    }
+    //}
 }
